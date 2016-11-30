@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+<!-- 
+	<turboFilter class="ch.qos.logback.classic.turbo.MDCFilter">
+			<MDCKey>user</MDCKey>
+			<Value>a168</Value>
+			<OnMatch>ACCEPT</OnMatch>
+	</turboFilter>
+	 -->
+	<!-- Appenders http://logback.qos.ch/manual/appenders.html -->
+	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>		
+			%date [%thread] %-5level %logger - %msg%n
+			</Pattern>
+		</layout>
+	</appender>
+	
+	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<Append>true</Append>
+		<Encoding>UTF-8</Encoding>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>../logs/frxx-%d{yyyy-MM-dd}.log.gz</fileNamePattern>
+			<maxHistory>60</maxHistory>
+		</rollingPolicy>
+		<BufferedIO>false</BufferedIO>
+		<ImmediateFlush>true</ImmediateFlush>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<!-- <Pattern>%date [%thread] %-5level %logger{35} - %msg%n</Pattern>  -->
+			<Pattern>%date - %msg%n</Pattern>
+		</layout>
+	</appender>
+	
+	<appender name="ErrorFILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+      		<level>ERROR</level>
+      		<onMatch>ACCEPT</onMatch>
+      		<onMismatch>DENY</onMismatch>
+    	</filter>
+		<Append>true</Append>
+		<Encoding>UTF-8</Encoding>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>../logs/frxxError-%d{yyyy-MM}.log</fileNamePattern>
+			<maxHistory>10</maxHistory>
+		</rollingPolicy>
+		<BufferedIO>false</BufferedIO>
+		<ImmediateFlush>true</ImmediateFlush>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>%date [%thread] %-5level %logger{35} - %msg%n</Pattern>
+		</layout>
+	</appender>
+	
+	<appender name="DayReportFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<Append>true</Append>
+		<Encoding>UTF-8</Encoding>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>../logs/Game/DayReport/dayreport_-%d{yyyy-MM-dd}.log.gz</fileNamePattern>
+			<maxHistory>60</maxHistory>
+		</rollingPolicy>
+		<BufferedIO>false</BufferedIO>
+		<ImmediateFlush>true</ImmediateFlush>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>%d{yyyy-MM-dd HH:mm:ss}#%msg%n</Pattern>
+		</layout>
+	</appender>
+	<appender name="RTReportFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<Append>true</Append>
+		<Encoding>UTF-8</Encoding>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>../logs/Game/RTReport/rtreport_-%d{yyyy-MM-dd}.log.gz</fileNamePattern>
+			<maxHistory>60</maxHistory>
+		</rollingPolicy>
+		<BufferedIO>false</BufferedIO>
+		<ImmediateFlush>true</ImmediateFlush>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>%d{yyyy-MM-dd HH:mm:ss}#%msg%n</Pattern>
+		</layout>
+	</appender>
+	
+	
+	
+	<root>
+		<level value="ERROR"/>
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="FILE" />
+		<appender-ref ref="ErrorFILE" />
+	</root>
+	<logger name="com.naqi.center">
+		<level value="DEBUG" />
+	</logger>
+	
+</configuration>
